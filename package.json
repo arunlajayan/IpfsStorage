@@ -1,0 +1,27 @@
+{
+  "name": "fullapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ARUNAL/ipfsstorage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/ARUNAL/ipfsstorage/issues"
+  },
+  "homepage": "https://gitlab.com/ARUNAL/ipfsstorage#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}

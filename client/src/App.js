@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-
+import axios from 'axios'
 import { useDropzone } from 'react-dropzone'
 import { Web3Storage } from "web3.storage";
 import { StyledCard,UploadBtn,ModelCard,InsideCard,ProgressModel } from "./Style/StyleCompoent";
@@ -10,12 +10,25 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [progress, setProgress] = useState(0);
   const [CID, setCid] = useState("");
+  const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
   const onDrop = useCallback((accFiles, rejFiles) => {
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
+  useEffect( () => {
+    async function fetchMyAPI() {
+      let response = await fetch(`http://localhost:3001`)
+      response = await response.json()
+     console.log(response)
+     setContent(response)
+    }
+
+    fetchMyAPI()
+
+
+},[])
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ onDrop });
   const onDelete = (file) => {
     console.log('deleet')
@@ -63,6 +76,9 @@ function App() {
 
   return (
     <StyledCard>
+      <div>
+        
+      </div>
 <div
         {...getRootProps()}
         style={{
@@ -121,14 +137,12 @@ const FileHeader = ({ file, onDelete }) => {
   );
 }
 const Modal = (progress, cid) => {
+
   useEffect(() => {
-    console.log("&", progress.progress);
-    
-  }, [progress]);
-  useEffect(() => {
+    async function fetchMyAPI() {
     console.log(progress);
     if(progress.progress == 100){
-      fetch('http:localhost:3000/post',{
+      fetch(`http://localhost:3001`,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -140,7 +154,14 @@ const Modal = (progress, cid) => {
         })
       })
     }
+    }
+    fetchMyAPI()
   }, [progress]);
+  useEffect(() => {
+    console.log("&", progress.progress);
+    
+  }, [progress]);
+
   return (
     <ModelCard
     >
